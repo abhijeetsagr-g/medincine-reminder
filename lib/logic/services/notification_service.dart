@@ -34,8 +34,7 @@ class NotificationService {
     if (_initialized) return;
     // Timezone setup
     tz.initializeTimeZones();
-    final timeZoneName = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(timeZoneName.identifier));
+    tz.setLocalLocation(tz.getLocation('Asia/Kolkata'));
 
     const androidSettings = AndroidInitializationSettings(
       '@mipmap/ic_launcher',

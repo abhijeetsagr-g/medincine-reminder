@@ -40,6 +40,7 @@ void main() {
       name: 'Paracetamol',
       dose: '500mg',
       time: DateTime.now(),
+      notificationId: DateTime.now().millisecondsSinceEpoch.remainder(100000),
     );
 
     provider.addMedicine(medicine);
@@ -51,6 +52,7 @@ void main() {
   test('Medicines should be sorted by time', () {
     provider.addMedicine(
       MedicineModel(
+        notificationId: DateTime.now().millisecondsSinceEpoch.remainder(100000),
         name: 'Afternoon',
         dose: '1 tab',
         time: DateTime(2026, 1, 1, 14, 0),
@@ -62,6 +64,7 @@ void main() {
         name: 'Morning',
         dose: '1 tab',
         time: DateTime(2026, 1, 1, 9, 0),
+        notificationId: DateTime.now().millisecondsSinceEpoch.remainder(100000),
       ),
     );
 
