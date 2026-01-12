@@ -1,5 +1,6 @@
 import 'package:assignment_medicine/data/model/medicine_model.dart';
 import 'package:assignment_medicine/logic/providers/medicine_provider.dart';
+import 'package:assignment_medicine/logic/service/permission_service.dart';
 import 'package:assignment_medicine/theme/app_theme.dart';
 import 'package:assignment_medicine/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,12 @@ import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
   Hive.registerAdapter(MedicineModelAdapter());
   final medicineBox = await Hive.openBox<MedicineModel>('medicines');
+
+  await PermissionService.requestNotificationPermission();
 
   runApp(
     ChangeNotifierProvider(
