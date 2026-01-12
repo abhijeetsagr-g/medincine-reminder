@@ -12,7 +12,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  AppBar _appBar() => AppBar(title: const Text("Medicine Reminder"));
+  AppBar _appBar(MedicineProvider provider) => AppBar(
+    title: const Text("Medicine Reminder"),
+    actions: [
+      IconButton(
+        onPressed: () => provider.deleteAll(),
+        icon: Icon(Icons.cancel),
+      ),
+    ],
+  );
 
   Widget _body(MedicineProvider provider) => provider.isEmpty
       ? const Center(child: Text("Add Your Meds here"))
@@ -31,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final provider = context.watch<MedicineProvider>();
     return Scaffold(
-      appBar: _appBar(),
+      appBar: _appBar(provider),
       body: _body(provider),
       floatingActionButton: FloatingActionButton(
         onPressed: () => changePage(),

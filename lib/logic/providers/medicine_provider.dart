@@ -1,4 +1,5 @@
 import 'package:assignment_medicine/data/model/medicine_model.dart';
+import 'package:assignment_medicine/logic/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -12,8 +13,20 @@ class MedicineProvider extends ChangeNotifier {
     return meds;
   }
 
-  void addMedicine(MedicineModel meds) {
+  Future<void> addMedicine(MedicineModel meds) async {
     _medicineBox.add(meds);
+    await NotificationService().scheduleDailyNotification(
+      id: meds.notificationId,
+      title: meds.name,
+      body: meds.dose,
+      time: meds.time,
+    );
+    notifyListeners();
+  }
+
+  Future<void> deleteAll() async {
+    _medicineBox.clear();
+    await NotificationService().cancelAll();
     notifyListeners();
   }
 

@@ -42,6 +42,8 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
       name: _nameController.text,
       dose: _doseController.text,
       time: scheduledTime,
+      // Give a  unique id
+      notificationId: DateTime.now().millisecondsSinceEpoch.remainder(100000),
     );
 
     context.read<MedicineProvider>().addMedicine(med);

@@ -13,9 +13,13 @@ class MedicineModel {
   @HiveField(2)
   final DateTime time;
 
+  @HiveField(3)
+  final int notificationId;
+
   const MedicineModel({
     required this.name,
     required this.dose,
     required this.time,
+    required this.notificationId,
   });
 }
